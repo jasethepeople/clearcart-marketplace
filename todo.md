@@ -1,0 +1,19 @@
+# Project TODO
+
+- [x] Define marketplace data model for profiles, products, categories, carts, orders, and verified reviews
+- [x] Create database migration and apply the marketplace schema
+- [x] Build a premium public storefront with hero, featured collection, categories, and search
+- [x] Build catalog browsing and individual product-detail experiences
+- [x] Implement Manus OAuth-aware account and profile views
+- [x] Implement persistent cart operations and quantity controls
+- [x] Implement placeholder checkout, confirmation, buyer order history, and status tracking
+- [x] Build a protected seller dashboard for listing creation and management
+- [x] Build a protected administrator panel for moderation, users, and orders
+- [x] Add seller product edit and archive controls with protected procedures
+- [x] Add administrator user-management actions with protected procedures
+- [x] Build order-linked review submission and reputation display without fabricated review data
+- [x] Write accessible Terms of Service, Privacy Policy, and Acceptable Use pages
+- [x] Add responsive navigation, footer policy links, and premium visual styling
+- [x] Add Vitest coverage for marketplace server rules and run quality checks
+- [x] Add administrator order-status controls and verify the completed-order review flow
+- [x] Verify the complete experience and save the delivery checkpoint

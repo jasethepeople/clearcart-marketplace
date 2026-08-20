@@ -1,0 +1,10 @@
+import { MarketplaceFooter } from "@/components/MarketplaceFooter";
+import { MarketplaceHeader } from "@/components/MarketplaceHeader";
+import { CheckCircle2, PackageCheck } from "lucide-react";
+import { Link, useLocation } from "wouter";
+
+export default function OrderConfirmation() {
+  const [location] = useLocation();
+  const reference = new URLSearchParams(location.split("?")[1] ?? "").get("order") ?? "your order";
+  return <div className="min-h-screen bg-[#faf8f4] text-stone-900"><MarketplaceHeader /><main className="mx-auto grid min-h-[62vh] max-w-3xl place-items-center px-5 py-16"><div className="w-full rounded-3xl border border-stone-200 bg-white p-8 text-center shadow-[0_20px_50px_rgba(48,42,33,.07)] sm:p-14"><span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#d8eadb] text-[#315545]"><CheckCircle2 className="h-8 w-8" /></span><p className="mt-7 text-xs font-semibold uppercase tracking-[.2em] text-[#a25c3d]">Order received</p><h1 className="mt-3 font-serif text-5xl tracking-[-.06em]">Thank you.</h1><p className="mx-auto mt-5 max-w-md text-sm leading-7 text-stone-600">Your placeholder order <span className="font-semibold text-stone-800">{reference}</span> is now pending. No payment has been collected in this preview.</p><div className="mx-auto mt-8 flex max-w-md items-start gap-3 rounded-xl bg-[#f0ede5] p-5 text-left"><PackageCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#315545]" /><p className="text-sm leading-6 text-stone-600">You can track order status from your buyer account. Verified reviews become available only after an order is marked completed.</p></div><div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row"><Link href="/account" className="rounded-lg bg-[#243d33] px-5 py-3 text-sm font-semibold text-white">View order history</Link><Link href="/catalog" className="rounded-lg border border-stone-200 px-5 py-3 text-sm font-semibold text-stone-700">Continue shopping</Link></div></div></main><MarketplaceFooter /></div>;
+}

@@ -1,6 +1,16 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CartProvider } from "@/contexts/CartContext";
+import Account from "@/pages/Account";
+import Cart from "@/pages/Cart";
+import Catalog from "@/pages/Catalog";
+import Checkout from "@/pages/Checkout";
 import NotFound from "@/pages/NotFound";
+import OrderConfirmation from "@/pages/OrderConfirmation";
+import Policies from "@/pages/Policies";
+import ProductDetail from "@/pages/ProductDetail";
+import Seller from "@/pages/Seller";
+import Admin from "@/pages/Admin";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -11,6 +21,15 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/catalog"} component={Catalog} />
+      <Route path={"/products/:slug"} component={ProductDetail} />
+      <Route path={"/cart"} component={Cart} />
+      <Route path={"/checkout"} component={Checkout} />
+      <Route path={"/confirmation"} component={OrderConfirmation} />
+      <Route path={"/account"} component={Account} />
+      <Route path={"/seller"} component={Seller} />
+      <Route path={"/admin"} component={Admin} />
+      <Route path={"/policies"} component={Policies} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -31,8 +50,10 @@ function App() {
         // switchable
       >
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <CartProvider>
+            <Toaster />
+            <Router />
+          </CartProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -1,33 +1,23 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { MarketplaceFooter } from "@/components/MarketplaceFooter";
+import { MarketplaceHeader } from "@/components/MarketplaceHeader";
+import { ProductCard } from "@/components/ProductCard";
+import { catalogProducts, categories } from "@/lib/catalog";
+import { ArrowDownRight, ArrowUpRight, BadgeCheck, HeartHandshake, SearchCheck, ShieldCheck } from "lucide-react";
+import { Link } from "wouter";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // The useAuth hook provides authentication state.
-  // To implement login/logout, call logout(), or start login from an event
-  // handler: onClick={() => startLogin()} (imported from "@/const"). Never call
-  // startLogin() during render (no href={startLogin()}) — it mints a one-time
-  // nonce cookie and must run only at the moment of navigation.
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
-
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
-  );
+  const featured = catalogProducts.filter((product) => product.featured);
+  return <div className="min-h-screen overflow-x-hidden bg-[#faf8f4] text-stone-900"><MarketplaceHeader />
+    <main>
+      <section className="relative mx-auto max-w-7xl px-5 pb-16 pt-10 lg:px-8 lg:pb-24 lg:pt-16">
+        <div className="grid overflow-hidden rounded-3xl bg-[#d9d4c9] lg:grid-cols-[1.02fr_.98fr]">
+          <div className="relative z-10 flex min-h-[540px] flex-col justify-between p-8 sm:p-12 lg:p-16"><div><p className="inline-flex items-center gap-2 rounded-full border border-[#406052]/25 bg-[#f7f4ec]/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.18em] text-[#315545]"><BadgeCheck className="h-3.5 w-3.5" />Responsible marketplace</p><h1 className="mt-8 max-w-xl font-serif text-6xl leading-[.88] tracking-[-.07em] text-[#243d33] sm:text-7xl lg:text-8xl">Find what<br />belongs.</h1><p className="mt-7 max-w-md text-[15px] leading-7 text-[#405248]">A quietly considered collection of legal goods from independent sellers who value craft, clarity, and long-term use.</p></div><div className="flex flex-wrap gap-3"><Link href="/catalog" className="inline-flex items-center gap-2 rounded-full bg-[#243d33] px-5 py-3.5 text-sm font-semibold text-white transition-transform hover:bg-[#315545] active:scale-[.97]">Shop the collection <ArrowUpRight className="h-4 w-4" /></Link><Link href="/seller" className="inline-flex items-center gap-2 rounded-full border border-[#315545]/25 bg-[#f7f4ec]/70 px-5 py-3.5 text-sm font-semibold text-[#243d33] transition-colors hover:border-[#315545]">Sell with us <ArrowUpRight className="h-4 w-4" /></Link></div></div>
+          <div className="relative min-h-[380px] overflow-hidden lg:min-h-full"><img src="/manus-storage/hero-home_b15e5d1b.jpg" alt="Warmly lit interior with a crafted oak lamp" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-x-5 bottom-5 flex items-center justify-between rounded-2xl bg-[#faf8f4]/90 px-5 py-4 backdrop-blur"><div><p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#a25c3d]">Featured maker</p><p className="mt-1 font-serif text-lg text-stone-800">Atelier North</p></div><ArrowDownRight className="h-5 w-5 text-[#243d33]" /></div></div>
+        </div>
+      </section>
+      <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.2em] text-[#a25c3d]">Start somewhere good</p><h2 className="mt-3 font-serif text-4xl tracking-[-.05em] sm:text-5xl">Shop by feeling</h2></div><Link href="/catalog" className="inline-flex items-center gap-2 text-sm font-semibold text-[#243d33]">See all categories <ArrowUpRight className="h-4 w-4" /></Link></div><div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{categories.map((category) => <Link key={category.slug} href={`/catalog?search=${encodeURIComponent(category.name)}`} className="group relative min-h-64 overflow-hidden rounded-2xl bg-stone-200"><img src={category.image} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent p-5 pt-16"><p className="font-serif text-2xl text-white">{category.name}</p><p className="mt-1 text-sm text-white/80">{category.description}</p></div></Link>)}</div></section>
+      <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><div className="grid gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.2em] text-[#a25c3d]">Selected with intention</p><h2 className="mt-3 max-w-sm font-serif text-5xl leading-[.95] tracking-[-.055em]">A few good things, chosen well.</h2></div><p className="max-w-xl text-[15px] leading-7 text-stone-600">Every listing is routed through category and policy review before it reaches the storefront. Explore pieces that are practical, enduring, and made to become part of a daily rhythm.</p></div><div className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">{featured.map((product, index) => <ProductCard key={product.id} product={product} priority={index === 0} />)}</div></section>
+      <section className="border-y border-stone-200 bg-[#f0ede5]"><div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 md:grid-cols-3 lg:px-8"><div className="flex gap-4"><ShieldCheck className="h-5 w-5 shrink-0 text-[#315545]" /><div><h3 className="font-serif text-xl">A safer standard</h3><p className="mt-2 text-sm leading-6 text-stone-600">Clear rules, seller review, and active moderation for lawful marketplace activity.</p></div></div><div className="flex gap-4"><SearchCheck className="h-5 w-5 shrink-0 text-[#315545]" /><div><h3 className="font-serif text-xl">Clarity before checkout</h3><p className="mt-2 text-sm leading-6 text-stone-600">Product details, stock signals, and order information remain easy to find.</p></div></div><div className="flex gap-4"><HeartHandshake className="h-5 w-5 shrink-0 text-[#315545]" /><div><h3 className="font-serif text-xl">Built for repeat trust</h3><p className="mt-2 text-sm leading-6 text-stone-600">Reviews are reserved for verified, completed orders—not invented social proof.</p></div></div></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="rounded-3xl bg-[#243d33] px-7 py-12 text-[#f7f4ec] sm:px-12 lg:flex lg:items-center lg:justify-between lg:px-16"><div><p className="text-xs font-semibold uppercase tracking-[.2em] text-[#d8af83]">For considered sellers</p><h2 className="mt-3 max-w-xl font-serif text-4xl leading-[.98] tracking-[-.05em] sm:text-5xl">Bring your work to a marketplace with standards.</h2><p className="mt-5 max-w-lg text-sm leading-7 text-[#f7f4ec]/75">Create a seller profile, submit listings for review, and manage orders from one clear workspace.</p></div><Link href="/seller" className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#f7f4ec] px-5 py-3.5 text-sm font-semibold text-[#243d33] transition-transform hover:bg-white active:scale-[.97] lg:mt-0">Explore selling <ArrowUpRight className="h-4 w-4" /></Link></div></section>
+    </main><MarketplaceFooter /></div>;
 }
