@@ -17,3 +17,6 @@
 - [x] Add Vitest coverage for marketplace server rules and run quality checks
 - [x] Add administrator order-status controls and verify the completed-order review flow
 - [x] Verify the complete experience and save the delivery checkpoint
+- [x] Review the attached project summary and reconcile any lawful marketplace requirements
+- [x] Add advanced category, price-range, and sort filtering controls to the catalog
+- [x] Add automated coverage and validate the updated catalog filtering experience

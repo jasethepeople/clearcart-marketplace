@@ -17,3 +17,7 @@ The cart view was then verified with the selected item, quantity controls, total
 ## Protected flow verification
 
 Following the hydration correction, direct checkout navigation retained the selected cart item and displayed the shipping form, the required Manus OAuth sign-in prompt, and explicit placeholder-payment messaging. The seller route was verified while signed out and rendered the dedicated authentication gate rather than exposing seller data. Authenticated seller, buyer, administrator, and completed-review state transitions are protected by the corresponding server procedures and covered by the marketplace rule tests; completing them requires a signed-in account with the relevant role.
+
+## Advanced catalog filtering
+
+The enhanced catalog was visually verified with category controls, preset price ranges, custom minimum and maximum prices, five sort choices, an active-filter indicator, and reset behavior. Selecting the “Under $50” range reduced the four-item collection to the single $46.00 eligible item, confirming the rendered filtering state matches the tested filter logic.
